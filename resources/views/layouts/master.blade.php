@@ -12,7 +12,7 @@
     <link rel="shortcut icon" href="{{ asset('mazer/assets/images/logo/favicon.png') }}" type="image/png">
 
     <link rel="stylesheet" href="{{ asset('mazer/assets/css/shared/iconly.css') }}">
-
+    @stack('style')
 </head>
 
 <body>
@@ -33,7 +33,8 @@
                 <section class="row">
                     <div class="col-12 col-lg-20">
                         {{-- Mulai Content --}}
-                        <div class="row">
+                        @yield('content')
+                        {{-- <div class="row">
                             <div class="col-6 col-lg-3 col-md-6">
                                 <div class="card">
                                     <div class="card-body px-4 py-4-5">
@@ -232,7 +233,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         {{-- Selesai Content --}}
                     </div>
                 </section>
@@ -241,13 +242,10 @@
             @include('partial.footer')
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <script src="{{ asset('mazer/assets/js/bootstrap.js') }}"></script>
     <script src="{{ asset('mazer/assets/js/app.js') }}"></script>
-
-    <!-- Need: Apexcharts -->
-    <script src="{{ asset('mazer/assets/extensions/apexcharts/apexcharts.min.js') }}"></script>
-    <script src="{{ asset('mazer/assets/js/pages/dashboard.js') }}"></script>
-
+    @stack('script')
 </body>
 
 </html>

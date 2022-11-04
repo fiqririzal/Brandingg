@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Require_once('includes/auth.php');
-
+Require_once('includes/category.php');
 Route::group([
     'middleware'=>'auth'
 ], function() {

@@ -57,7 +57,7 @@
                     </a>
                     <ul class="submenu ">
                         <li class="submenu-item ">
-                            <a href="component-alert.html">Kategori</a>
+                            <a href="{{url('category')}}">Kategori</a>
                         </li>
                         <li class="submenu-item ">
                             <a href="component-alert.html">Produk</a>
