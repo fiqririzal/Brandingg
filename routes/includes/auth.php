@@ -7,6 +7,8 @@ Route::group([
 ], function() {
 Route::get('/login','AuthController@view')->name('login');
 Route::post('/login','AuthController@login');
+Route::get('/register', 'AuthController@getRegister')->name('register');
+Route::post('/register', 'AuthController@postRegister');
 
 });
 Route::group([

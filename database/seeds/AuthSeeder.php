@@ -16,5 +16,9 @@ class AuthSeeder extends Seeder
             'name' => 'Admin',
             'guard_name'=>'web'
         ]);
+        Role::create([
+            'name' => 'User',
+            'guard_name'=>'web'
+        ]);
     }
 }

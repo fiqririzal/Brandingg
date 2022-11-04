@@ -18,6 +18,7 @@ class UserSeeder extends Seeder
             'name' => 'fiqri',
             'email' => 'Fiqririzal@gmail.com',
             'password' => Hash::make('admin'),
+            'phone' => '0813212',
         ]);
         $admin->assignRole('Admin');
 

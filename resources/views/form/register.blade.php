@@ -4,7 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Pandawa Kaca</title>
+    <title>Purple Admin</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="/assets/vendors/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="/assets/vendors/css/vendor.bundle.base.css">
@@ -28,21 +28,34 @@
                 <div class="brand-logo">
                   <img src="/assets/images/logo.svg">
                 </div>
-                <h4>Selamat Datang Pandawa</h4>
-                <h6 class="font-weight-light">Yo Semangat Jualanya</h6>
-                <form class="pt-3" method="post" action="{{url ('/login')}}">
+                <h4>New here?</h4>
+                <h6 class="font-weight-light">Signing up is easy. It only takes a few steps</h6>
+
+                <form class="pt-3" method="post" action="{{route('register')}}">
                     @csrf
                   <div class="form-group">
-                    <input type="email" class="form-control form-control-lg" id="email" placeholder="email"name="email">
+                    <input type="text" class="form-control form-control-lg" id="name" name="name" placeholder="Username">
                   </div>
                   <div class="form-group">
-                    <input type="password" class="form-control form-control-lg" id="password" placeholder="Password" name="password">
+                    <input type="email" class="form-control form-control-lg" id="email" name="email" placeholder="Email">
+                  </div>
+                  <div class="form-group">
+                    <input type="password" class="form-control form-control-lg" id="password" name="password" placeholder="Password">
+                  </div>
+                  <div class="form-group">
+                    <input type="number" class="form-control form-control-lg" id="phone" name="phone" placeholder="phone">
+                  </div>
+                  <div class="mb-4">
+                    <div class="form-check">
+                      <label class="form-check-label text-muted">
+                        <input type="checkbox" class="form-check-input"> I agree to all Terms & Conditions </label>
+                    </div>
                   </div>
                   <div class="mt-3">
-                    <button class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn">SIGN IN</button>
+                    <button class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn" type="submit">SIGN UP</button>
                   </div>
-                  <div class="text-center mt-4 font-weight-light"> Don't have an account?
-                    <a href="{{url('register')}}" class="text-primary">Create</a>
+                  <div class="text-center mt-4 font-weight-light"> Already have an account? <a href="{{url('/')}}" class="text-primary">Login</a>
+                  </div>
                 </form>
               </div>
             </div>
