@@ -1,37 +1,14 @@
 <script>
-    let category_id;
+    let supplier_id
 
     const create = () => {
         $('#createForm').trigger('reset');
         $('#createModal').modal('show');
     }
-    const edit = (id) => {
-        Swal.fire({
-            title: 'Mohon tunggu',
-            showConfirmButton: false,
-            allowOutsideClick: false,
-            willOpen: () => {
-                Swal.showLoading()
-            }
-        });
-        category_id = id;
 
-        $.ajax({
-            type: "get",
-            url: `/category/${category_id}}`,
-            dataType: "json",
-            success: function(response) {
-                $('#name').val(response.name);
-
-                Swal.close();
-                $('#editModal').modal('show');
-            }
-        });
-
-    }
     const deleteData = (id) => {
         Swal.fire({
-            title: 'Apa anda yakin untuk menghapus kategori ini?',
+            title: 'Apa anda yakin untuk menghapus supplier ini?',
             icon: 'warning',
             showCancelButton: true,
             confirmButtonText: 'Ya',
@@ -51,7 +28,7 @@
 
                 $.ajax({
                     type: "delete",
-                    url: `/category/${id}`,
+                    url: `/supplier/${id}`,
                     dataType: "json",
                     success: function(response) {
                         Swal.close();
@@ -61,7 +38,7 @@
                                 response.msg,
                                 'success'
                             )
-                            $('#category').DataTable().ajax.reload();
+                            $('#table').DataTable().ajax.reload();
                         } else {
                             Swal.fire(
                                 'Error!',
@@ -73,15 +50,77 @@
                 });
             }
         });
-
     }
+
+    const edit = (id) => {
+        Swal.fire({
+            title: 'Mohon tunggu',
+            showConfirmButton: false,
+            allowOutsideClick: false,
+            willOpen: () => {
+                Swal.showLoading()
+            }
+        });
+        supplier_id = id;
+
+        $.ajax({
+            type: "get",
+            url: `/supplier/${supplier_id}`,
+            dataType: "json",
+            success: function(response) {
+                $('#editname').val(response.name);
+                $('#editaddress').val(response.address);
+
+                Swal.close();
+                $('#editModal').modal('show');
+            }
+        })
+    }
+
     $(function() {
+
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             }
         });
 
+        $('#table').DataTable({
+            dom: 'Bfrtip',
+            // Configure the drop down options.
+            lengthMenu: [
+                [10, 25, 50, -1],
+                ['10 rows', '25 rows', '50 rows', 'Show all']
+            ],
+            buttons: [
+                'pageLength', 'excel', 'pdf', 'print'
+            ],
+            filter: true,
+            processing: true,
+            responsive: true,
+            serverSide: true,
+            ajax: {
+                url: '{{ route('supplier.data') }}'
+            },
+            "columns": [{
+                    data: 'DT_RowIndex',
+                    orderable: false,
+                    searchable: false
+                },
+                {
+                    data: 'name',
+                },
+                {
+                    data: 'address',
+                },
+                {
+                    data: 'action',
+                    orderable: false,
+                    searchable: false
+                },
+
+            ]
+        });
 
         $('#createSubmit').click(function(e) {
             e.preventDefault();
@@ -99,14 +138,13 @@
 
             $.ajax({
                 type: "post",
-                url: "/category",
+                url: "/supplier",
                 data: formData,
                 dataType: "json",
                 cache: false,
                 processData: false,
                 success: function(data) {
                     Swal.close();
-
                     if (data.status) {
                         Swal.fire(
                             'Success!',
@@ -115,7 +153,7 @@
                         )
 
                         $('#createModal').modal('hide');
-                        $('#category').DataTable().ajax.reload();
+                        $('#table').DataTable().ajax.reload();
                     } else {
                         Swal.fire(
                             'Error!',
@@ -126,6 +164,7 @@
                 }
             })
         });
+
         $('#editSubmit').click(function(e) {
             e.preventDefault();
 
@@ -142,22 +181,23 @@
 
             $.ajax({
                 type: "post",
-                url: `/category/${category_id}`,
-                data: formData,
+                url: `/supplier/${supplier_id}`,
                 dataType: "json",
+                data: formData,
                 cache: false,
-                processData: false,
+                proccessData: false,
                 success: function(data) {
                     Swal.close();
+
                     if (data.status) {
                         Swal.fire(
                             'Success!',
                             data.msg,
                             'success'
                         )
-                        category_id = null;
+                        supplier_id = null;
                         $('#editModal').modal('hide');
-                        $('#category').DataTable().ajax.reload();
+                        $('#table').DataTable().ajax.reload();
                     } else {
                         Swal.fire(
                             'Error!',
@@ -166,37 +206,7 @@
                         )
                     }
                 }
-            })
-        });
-        $('#category').DataTable({
-            order: [],
-            lengthMenu: [
-                [10, 25, 50, 100, -1],
-                ['Sepuluh', 'Salawe', 'lima puluh', 'cepe', 'kabeh']
-            ],
-            filter: true,
-            processing: true,
-            responsive: true,
-            serverSide: true,
-            ajax: {
-                url: '/category/bebas'
-            },
-            "columns": [{
-                    data: 'DT_RowIndex',
-                    orderable: false,
-                    searchable: false
-                },
-                {
-                    data: 'name',
-                    name: 'category.name'
-                },
-                {
-                    data: 'action',
-                    orderable: false,
-                    searchable: false
-                },
-
-            ]
+            });
         });
     });
 </script>

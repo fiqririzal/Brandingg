@@ -8,8 +8,13 @@
 
     <link rel="stylesheet" href="{{ asset('mazer/assets/css/main/app.css') }}">
     <link rel="stylesheet" href="{{ asset('mazer/assets/css/main/app-dark.css') }}">
+    <link rel="stylesheet" href="{{ asset('mazer/assets/css/main/custom.css') }}">
     <link rel="shortcut icon" href="{{ asset('mazer/assets/images/logo/favicon.svg') }}" type="image/x-icon">
     <link rel="shortcut icon" href="{{ asset('mazer/assets/images/logo/favicon.png') }}" type="image/png">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.datatables.net/v/bs5/jszip-2.5.0/dt-1.12.1/b-2.2.3/b-html5-2.2.3/datatables.css" />
+
+
 
     <link rel="stylesheet" href="{{ asset('mazer/assets/css/shared/iconly.css') }}">
     @stack('style')
@@ -26,9 +31,8 @@
                 </a>
             </header>
 
-            <div class="page-heading">
-                <h3>Profile Statistics</h3>
-            </div>
+            @yield('title')
+
             <div class="page-content">
                 <section class="row">
                     <div class="col-12 col-lg-20">
@@ -242,9 +246,11 @@
             @include('partial.footer')
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <script src="{{ asset('mazer/assets/js/bootstrap.js') }}"></script>
     <script src="{{ asset('mazer/assets/js/app.js') }}"></script>
+
     @stack('script')
 </body>
 

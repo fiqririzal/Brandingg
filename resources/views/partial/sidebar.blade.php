@@ -3,7 +3,8 @@
         <div class="sidebar-header position-relative">
             <div class="d-flex justify-content-between align-items-center">
                 <div class="logo">
-                    <a href="index.html"><img src="mazer/assets/images/logo/logo.svg" alt="Logo" srcset=""></a>
+                    <a href="index.html"><img src="{{ asset('mazer/assets/images/logo/logo.svg') }}" alt="Logo"
+                            srcset=""></a>
                 </div>
                 <div class="theme-toggle d-flex gap-2  align-items-center mt-2">
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -43,27 +44,35 @@
             <ul class="menu">
                 <li class="sidebar-title">Menu</li>
 
-                <li class="sidebar-item active ">
+                <li class="sidebar-item {{ Request::url() == url('/') ? 'active' : '' }}">
                     <a href="index.html" class='sidebar-link'>
                         <i class="bi bi-grid-fill"></i>
                         <span>Dashboard</span>
                     </a>
                 </li>
 
-                <li class="sidebar-item  has-sub">
+                <li
+                    class="sidebar-item  has-sub  @if (Request::url() == url('/category')) active @endif
+                @if (Request::url() == url('/product')) active @endif
+                @if (Request::url() == url('/supplier')) active @endif
+                ">
                     <a href="#" class='sidebar-link'>
                         <i class="bi bi-stack"></i>
                         <span>Data Master</span>
                     </a>
-                    <ul class="submenu ">
-                        <li class="submenu-item ">
-                            <a href="{{url('category')}}">Kategori</a>
+                    <ul
+                        class="submenu @if (Request::url() == url('/category')) active @endif
+                    @if (Request::url() == url('/product')) active @endif
+                    @if (Request::url() == url('/supplier')) active @endif">
+
+                        <li class="submenu-item {{ Request::url() == url('/category') ? 'active' : '' }}">
+                            <a href="{{ url('category') }}">Kategori</a>
                         </li>
-                        <li class="submenu-item ">
-                            <a href="component-alert.html">Produk</a>
+                        <li class="submenu-item {{ Request::url() == url('/product') ? 'active' : '' }}">
+                            <a href="{{ url('product') }}">Produk</a>
                         </li>
-                        <li class="submenu-item ">
-                            <a href="component-alert.html">Supplier</a>
+                        <li class="submenu-item {{ Request::url() == url('/supplier') ? 'active' : '' }} ">
+                            <a href="{{ url('supplier') }}">Supplier</a>
                         </li>
                     </ul>
                 </li>

@@ -1,37 +1,14 @@
 <script>
-    let category_id;
+    let product_id
 
     const create = () => {
         $('#createForm').trigger('reset');
         $('#createModal').modal('show');
     }
-    const edit = (id) => {
-        Swal.fire({
-            title: 'Mohon tunggu',
-            showConfirmButton: false,
-            allowOutsideClick: false,
-            willOpen: () => {
-                Swal.showLoading()
-            }
-        });
-        category_id = id;
 
-        $.ajax({
-            type: "get",
-            url: `/category/${category_id}}`,
-            dataType: "json",
-            success: function(response) {
-                $('#name').val(response.name);
-
-                Swal.close();
-                $('#editModal').modal('show');
-            }
-        });
-
-    }
     const deleteData = (id) => {
         Swal.fire({
-            title: 'Apa anda yakin untuk menghapus kategori ini?',
+            title: 'Apa anda yakin untuk menghapus produk ini?',
             icon: 'warning',
             showCancelButton: true,
             confirmButtonText: 'Ya',
@@ -51,7 +28,7 @@
 
                 $.ajax({
                     type: "delete",
-                    url: `/category/${id}`,
+                    url: `/product/${id}`,
                     dataType: "json",
                     success: function(response) {
                         Swal.close();
@@ -61,7 +38,7 @@
                                 response.msg,
                                 'success'
                             )
-                            $('#category').DataTable().ajax.reload();
+                            $('#table').DataTable().ajax.reload();
                         } else {
                             Swal.fire(
                                 'Error!',
@@ -73,113 +50,61 @@
                 });
             }
         });
-
     }
+
+    const edit = (id) => {
+        Swal.fire({
+            title: 'Mohon tunggu',
+            showConfirmButton: false,
+            allowOutsideClick: false,
+            willOpen: () => {
+                Swal.showLoading()
+            }
+        });
+        product_id = id;
+
+        $.ajax({
+            type: "get",
+            url: `/product/${product_id}`,
+            dataType: "json",
+            success: function(response) {
+                $('#name-edit').val(response.name);
+                $('#category-edit').val(response.category_id);
+                $('#price-edit').val(response.price);
+                $('#stock-edit').val(response.stock);
+                $('#description-edit').val(response.description);
+
+
+                Swal.close();
+                $('#editModal').modal('show');
+            }
+        })
+    }
+
     $(function() {
+
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             }
         });
 
-
-        $('#createSubmit').click(function(e) {
-            e.preventDefault();
-
-            var formData = $('#createForm').serialize();
-
-            Swal.fire({
-                title: 'Mohon tunggu',
-                showConfirmButton: false,
-                allowOutsideClick: false,
-                willOpen: () => {
-                    Swal.showLoading()
-                }
-            });
-
-            $.ajax({
-                type: "post",
-                url: "/category",
-                data: formData,
-                dataType: "json",
-                cache: false,
-                processData: false,
-                success: function(data) {
-                    Swal.close();
-
-                    if (data.status) {
-                        Swal.fire(
-                            'Success!',
-                            data.msg,
-                            'success'
-                        )
-
-                        $('#createModal').modal('hide');
-                        $('#category').DataTable().ajax.reload();
-                    } else {
-                        Swal.fire(
-                            'Error!',
-                            data.msg,
-                            'warning'
-                        )
-                    }
-                }
-            })
-        });
-        $('#editSubmit').click(function(e) {
-            e.preventDefault();
-
-            var formData = $('#editForm').serialize();
-
-            Swal.fire({
-                title: 'Mohon tunggu',
-                showConfirmButton: false,
-                allowOutsideClick: false,
-                willOpen: () => {
-                    Swal.showLoading()
-                }
-            });
-
-            $.ajax({
-                type: "post",
-                url: `/category/${category_id}`,
-                data: formData,
-                dataType: "json",
-                cache: false,
-                processData: false,
-                success: function(data) {
-                    Swal.close();
-                    if (data.status) {
-                        Swal.fire(
-                            'Success!',
-                            data.msg,
-                            'success'
-                        )
-                        category_id = null;
-                        $('#editModal').modal('hide');
-                        $('#category').DataTable().ajax.reload();
-                    } else {
-                        Swal.fire(
-                            'Error!',
-                            data.msg,
-                            'warning'
-                        )
-                    }
-                }
-            })
-        });
-        $('#category').DataTable({
-            order: [],
+        $('#table').DataTable({
+            dom: 'Bfrtip',
+            // Configure the drop down options.
             lengthMenu: [
-                [10, 25, 50, 100, -1],
-                ['Sepuluh', 'Salawe', 'lima puluh', 'cepe', 'kabeh']
+                [10, 25, 50, -1],
+                ['10 rows', '25 rows', '50 rows', 'Show all']
+            ],
+            buttons: [
+                'pageLength', 'excel', 'pdf', 'print'
             ],
             filter: true,
             processing: true,
             responsive: true,
             serverSide: true,
             ajax: {
-                url: '/category/bebas'
+                url: '{{ route('product.data') }}'
             },
             "columns": [{
                     data: 'DT_RowIndex',
@@ -188,7 +113,21 @@
                 },
                 {
                     data: 'name',
-                    name: 'category.name'
+                },
+                {
+                    data: 'category_name'
+                },
+                {
+                    data: 'price',
+                },
+                {
+                    data: 'stock',
+                },
+                {
+                    data: 'description',
+                },
+                {
+                    data: 'image',
                 },
                 {
                     data: 'action',
@@ -197,6 +136,95 @@
                 },
 
             ]
+        });
+
+        $('#createSubmit').click(function(e) {
+            e.preventDefault();
+
+            var formData = new FormData($('#createForm')[0]);
+
+            Swal.fire({
+                title: 'Mohon tunggu',
+                showConfirmButton: false,
+                allowOutsideClick: false,
+                willOpen: () => {
+                    Swal.showLoading()
+                }
+            });
+
+            $.ajax({
+                type: "post",
+                url: "/product",
+                data: formData,
+                dataType: "json",
+                cache: false,
+                processData: false,
+                contentType: false,
+                success: function(data) {
+                    Swal.close();
+                    if (data.status) {
+                        Swal.fire(
+                            'Success!',
+                            data.msg,
+                            'success'
+                        )
+
+                        $('#createModal').modal('hide');
+                        $('#table').DataTable().ajax.reload();
+                    } else {
+                        Swal.fire(
+                            'Error!',
+                            data.msg,
+                            'warning'
+                        )
+                    }
+                }
+            });
+        });
+
+        $('#editSubmit').click(function(e) {
+            e.preventDefault();
+
+            var formData = new FormData($('#editForm')[0]);
+
+            Swal.fire({
+                title: 'Mohon tunggu',
+                showConfirmButton: false,
+                allowOutsideClick: false,
+                willOpen: () => {
+                    Swal.showLoading()
+                }
+            });
+
+            $.ajax({
+                type: "post",
+                url: `/product/${product_id}`,
+                data: formData,
+                dataType: "json",
+                cache: false,
+                processData: false,
+                contentType: false,
+                success: function(data) {
+                    Swal.close();
+
+                    if (data.status) {
+                        Swal.fire(
+                            'Success!',
+                            data.msg,
+                            'success'
+                        )
+                        supplier_id = null;
+                        $('#editModal').modal('hide');
+                        $('#table').DataTable().ajax.reload();
+                    } else {
+                        Swal.fire(
+                            'Error!',
+                            data.msg,
+                            'warning'
+                        )
+                    }
+                }
+            });
         });
     });
 </script>
