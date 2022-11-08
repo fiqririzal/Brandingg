@@ -18,7 +18,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $category = category::all()->pluck('id', 'name');
+
         $data = [
             'script' => 'components.scripts.product.index',
             'category' => category::all()->pluck('name', 'id'),
