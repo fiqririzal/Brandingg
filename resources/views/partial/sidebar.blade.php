@@ -77,6 +77,12 @@
                     </ul>
                 </li>
 
+                    <ul>
+                        <li class="sidebar-item">
+                            <a href="{{ url('transaction') }}">Transaksi Pembelian</a>
+                        </li>
+                    </ul>
+
                 <li class="sidebar-item">
                     <a href="{{ url('/logout') }}" class='sidebar-link'>
                         <i class="bi bi-box-arrow-left"></i>
