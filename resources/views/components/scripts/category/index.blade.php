@@ -22,10 +22,10 @@
 
         $.ajax({
             type: "get",
-            url: `/category/${category_id}}`,
+            url: `/category/${category_id}`,
             dataType: "json",
             success: function(response) {
-                $('#name').val(response.name);
+                $('#name-edit').val(response.name);
 
                 Swal.close();
                 $('#editModal').modal('show');
@@ -173,10 +173,14 @@
             })
         });
         $('#category').DataTable({
-            order: [],
+            dom: 'Bfrtip',
+            // Configure the drop down options.
             lengthMenu: [
-                [10, 25, 50, 100, -1],
-                ['Sepuluh', 'Salawe', 'lima puluh', 'cepe', 'kabeh']
+                [10, 25, 50, -1],
+                ['10 rows', '25 rows', '50 rows', 'Show all']
+            ],
+            buttons: [
+                'pageLength', 'excel', 'pdf', 'print'
             ],
             filter: true,
             processing: true,

@@ -20,6 +20,13 @@
             <h1 class="auth-title">Log in.</h1>
             <p class="auth-subtitle mb-5">Log in with your email.</p>
 
+            @if (session()->has('loginError'))
+                <div class="alert alert-danger alert-dismissible show fade">
+                    {{ session('loginError') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+
             <form action="{{ url('/login') }}" method="POST">
                 @csrf
                 <div class="form-group position-relative has-icon-left mb-4">

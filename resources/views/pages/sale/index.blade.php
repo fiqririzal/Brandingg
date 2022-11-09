@@ -2,7 +2,7 @@
 
 @section('title')
     <div class="page-heading">
-        <h3>Penjualan</h3>
+        <h3>Transaksi Penjualan</h3>
     </div>
 @endsection
 
@@ -12,7 +12,7 @@
         <div class="card mb-3">
             <div class="card-header">
                 <button type="button" class="btn btn-outline-primary block" onclick="create()">
-                    Tambah Penjualan
+                    Jual Produk
                 </button>
             </div>
 

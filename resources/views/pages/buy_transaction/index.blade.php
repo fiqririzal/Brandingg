@@ -2,46 +2,46 @@
 
 @section('title')
     <div class="page-heading">
-        <h3>Tambah Product</h3>
+        <h3>Transaksi Pembelian</h3>
     </div>
 @endsection
 
 @section('content')
-        <div class="card mb-3">
-            <div class="card-header">
-                <button type="button" class="btn btn-outline-primary block" onclick="create()">
-                    Beli Product
-                </button>
-            </div>
-
-            <div class="card-body">
-                <!-- table head dark -->
-                <div class="table-responsive">
-                    <table class="table mb-0" id="table_transaction">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th width="5%">NO</th>
-                                <th>SUPPLIER</th>
-                                <th>KATEGORI</th>
-                                <th>PRODUK</th>
-                                <th>JUMLAH BARANG</th>
-                                <th>TOTAL HARGA</th>
-                                <th>ACTION</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+    <div class="card mb-3">
+        <div class="card-header">
+            <button type="button" class="btn btn-outline-primary block" onclick="create()">
+                Beli Produk
+            </button>
         </div>
 
-        @include('components.modals.buy_transaction.create')
+        <div class="card-body">
+            <!-- table head dark -->
+            <div class="table-responsive">
+                <table class="table mb-0" id="table_transaction">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th width="5%">NO</th>
+                            <th>SUPPLIER</th>
+                            <th>KATEGORI</th>
+                            <th>PRODUK</th>
+                            <th>JUMLAH BARANG</th>
+                            <th>TOTAL HARGA</th>
+                            <th>ACTION</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 
-        @push('script')
-            @include('components.scripts.datatables')
-            @include('components.scripts.sweetalert')
+    @include('components.modals.buy_transaction.create')
+@endsection
 
-        @include($script)
-        @endpush
-    @endsection
+@push('script')
+    @include('components.scripts.datatables')
+    @include('components.scripts.sweetalert')
+
+    @include($script)
+@endpush

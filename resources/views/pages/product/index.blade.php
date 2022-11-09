@@ -2,7 +2,7 @@
 
 @section('title')
     <div class="page-heading">
-        <h3>Product</h3>
+        <h3>Produk</h3>
     </div>
 @endsection
 
@@ -12,10 +12,10 @@
         <div class="card mb-3">
             <div class="card-header">
                 <button type="button" class="btn btn-outline-primary block" onclick="create()">
-                    Tambah Product
+                    Tambah Produk
                 </button>
                 <button type="button" class="btn btn-outline-primary block" onclick="importData()">
-                    Import Product
+                    Import Produk
                 </button>
             </div>
 
@@ -45,11 +45,11 @@
     @include('components.modals.product.create')
     @include('components.modals.product.import')
     @include('components.modals.product.edit')
-
-    @push('script')
-        @include('components.scripts.datatables')
-        @include('components.scripts.sweetalert')
-
-        @include($script)
-    @endpush
 @endsection
+
+@push('script')
+    @include('components.scripts.datatables')
+    @include('components.scripts.sweetalert')
+
+    @include($script)
+@endpush

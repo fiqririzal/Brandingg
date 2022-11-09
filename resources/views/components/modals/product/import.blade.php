@@ -1,13 +1,13 @@
 <div class="modal fade text-left" id="importModal" tabindex="-1" role="dialog" aria-labelledby="importModal"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="importModal">Tambah Category</h5>
-                    <button type="button" class="close rounded-pill" data-bs-dismiss="modal" aria-label="Close">
-                        <i data-feather="x"></i>
-                    </button>
-                </div>
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="importModal">Tambah Produk</h5>
+                <button type="button" class="close rounded-pill" data-bs-dismiss="modal" aria-label="Close">
+                    <i data-feather="x"></i>
+                </button>
+            </div>
             <form action="{{ url('/importCategory') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
@@ -26,6 +26,6 @@
                     </button>
                 </div>
             </form>
-            </div>
         </div>
     </div>
+</div>

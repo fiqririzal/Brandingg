@@ -19,16 +19,13 @@ Route::group([
     'middleware' => 'auth'
 ], function () {
     Route::get('/', function () {
-        return view('welcome');
+        return view('dashboard');
     });
-    
-    
+
+
     require_once('includes/category.php');
     require_once('includes/supplier.php');
     require_once('includes/product.php');
     require_once('includes/buy_transaction.php');
     require_once('includes/sale.php');
-
-    
 });
-
