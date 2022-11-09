@@ -8,3 +8,4 @@ Route::get('/product/data', 'ProductController@data')->name('product.data');
 Route::get('/product/{id}', 'ProductController@show');
 Route::post('/product/{id}', 'ProductController@update');
 Route::delete('/product/{id}', 'ProductController@destroy');
+Route::post('/importProduct', 'ProductController@import');

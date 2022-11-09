@@ -8,3 +8,4 @@ Route::get('/supplier/data', 'SupplierController@data')->name('supplier.data');
 Route::get('/supplier/{id}', 'SupplierController@show');
 Route::post('/supplier/{id}', 'SupplierController@update');
 Route::delete('/supplier/{id}', 'SupplierController@destroy');
+Route::post('/importSupplier', 'SupplierController@import');

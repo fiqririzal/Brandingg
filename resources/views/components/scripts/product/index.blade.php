@@ -6,6 +6,11 @@
         $('#createModal').modal('show');
     }
 
+    const importData = () => {
+        $('#importProduct').trigger('reset');
+        $('#importModal').modal('show');
+    }
+
     const deleteData = (id) => {
         Swal.fire({
             title: 'Apa anda yakin untuk menghapus produk ini?',
@@ -137,7 +142,7 @@
 
             ]
         });
-
+        
         $('#createSubmit').click(function(e) {
             e.preventDefault();
 

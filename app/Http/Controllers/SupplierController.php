@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Exception;
 use App\Supplier;
 use Illuminate\Http\Request;
+use App\Imports\SupplierImport;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Response;
 
 class SupplierController extends Controller
@@ -188,5 +190,13 @@ class SupplierController extends Controller
             ];
         };
         return Response::json($json);
+    }
+    public function import(Request $request){
+        $data = $request->file('import');
+
+        Excel::import(new SupplierImport, $data);
+
+        return \redirect()->back();
+
     }
 }

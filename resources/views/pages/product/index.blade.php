@@ -14,6 +14,9 @@
                 <button type="button" class="btn btn-outline-primary block" onclick="create()">
                     Tambah Product
                 </button>
+                <button type="button" class="btn btn-outline-primary block" onclick="importData()">
+                    Import Product
+                </button>
             </div>
 
             <div class="card-body">
@@ -40,6 +43,7 @@
         </div>
     </section>
     @include('components.modals.product.create')
+    @include('components.modals.product.import')
     @include('components.modals.product.edit')
 
     @push('script')

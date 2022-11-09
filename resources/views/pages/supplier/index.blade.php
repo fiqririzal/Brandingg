@@ -14,6 +14,9 @@
                 <button type="button" class="btn btn-outline-primary block" onclick="create()">
                     Tambah Supplier
                 </button>
+                <button type="button" class="btn btn-outline-primary block" onclick="importData()">
+                    Import Supplier
+                </button>
             </div>
 
             <div class="card-body">
@@ -37,6 +40,7 @@
     </section>
     @include('components.modals.supplier.create')
     @include('components.modals.supplier.edit')
+    @include('components.modals.supplier.import')
 
     @push('script')
         @include('components.scripts.datatables')

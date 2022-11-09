@@ -5,6 +5,10 @@
         $('#createForm').trigger('reset');
         $('#createModal').modal('show');
     }
+    const importData = () => {
+        $('#importProduct').trigger('reset');
+        $('#importModal').modal('show');
+    }
     const edit = (id) => {
         Swal.fire({
             title: 'Mohon tunggu',

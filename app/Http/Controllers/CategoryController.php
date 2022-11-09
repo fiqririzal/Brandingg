@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Exception;
 use Illuminate\Http\Request;
+use App\Imports\CategoryImport;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Response;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -114,4 +116,13 @@ class CategoryController extends Controller
         };
         return Response::json($json);
     }
+    public function import(Request $request){
+        $data = $request->file('import');
+
+        Excel::import(new CategoryImport, $data);
+
+        return \redirect()->back();
+
+    }
+
 }

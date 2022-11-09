@@ -6,7 +6,9 @@ use Exception;
 use App\Product;
 use App\category;
 use Illuminate\Http\Request;
+use App\Imports\ProductImport;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Response;
 
 class ProductController extends Controller
@@ -256,4 +258,14 @@ class ProductController extends Controller
         };
         return Response::json($json);
     }
+    public function import(Request $request){
+        $data = $request->file('import');
+
+        Excel::import(new ProductImport, $data);
+
+        return \redirect()->back();
+        
+    }
+
+
 }

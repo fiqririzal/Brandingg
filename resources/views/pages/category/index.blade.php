@@ -23,6 +23,7 @@
                 <!-- table head dark -->
                 <div class="table-responsive">
                     <button type="button" class="btn btn-primary me-1 mb-1" onclick="create()">Tambah Kategori</button>
+                    <button type="button" class="btn btn-primary me-1 mb-1" onclick="importData()">Import Kategori</button>
                     <table class="table mb-0" id="category">
                         <thead class="thead-dark">
                             <tr>
@@ -48,6 +49,7 @@
     </div>
     @include('components.modals.category.create')
     @include('components.modals.category.edit')
+    @include('components.modals.category.import')
     {{-- @include('components.modals.rental.edit')
 @include('components.modals.rental.sewa') --}}
 
