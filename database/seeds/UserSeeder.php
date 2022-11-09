@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
             'password' => Hash::make('admin'),
             'phone' => '0813212',
         ]);
-        $admin->assignRole('Admin');
+        $admin->assignRole('Super Admin');
 
         $admin = User::create([
             'name' => 'Arsy Nizlan Ramadhan',

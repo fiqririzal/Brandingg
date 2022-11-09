@@ -13,11 +13,11 @@ class AuthSeeder extends Seeder
     public function run()
     {
         Role::create([
-            'name' => 'Admin',
+            'name' => 'Super Admin',
             'guard_name'=>'web'
         ]);
         Role::create([
-            'name' => 'User',
+            'name' => 'Admin',
             'guard_name'=>'web'
         ]);
     }

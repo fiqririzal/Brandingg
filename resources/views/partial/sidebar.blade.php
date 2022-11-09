@@ -50,15 +50,16 @@
                     </a>
                 </li>
 
+                @role('Super Admin')
                 <li
-                    class="sidebar-item  has-sub  @if (Request::url() == url('/category')) active @endif
+                class="sidebar-item  has-sub  @if (Request::url() == url('/category')) active @endif
                 @if (Request::url() == url('/supplier')) active @endif
                 ">
-                    <a href="#" class='sidebar-link'>
-                        <i class="bi bi-stack"></i>
-                        <span>Data Master</span>
-                    </a>
-                    <ul
+                <a href="#" class='sidebar-link'>
+                    <i class="bi bi-stack"></i>
+                    <span>Data Master</span>
+                </a>
+                <ul
                         class="submenu @if (Request::url() == url('/category')) active @endif
                     @if (Request::url() == url('/supplier')) active @endif">
 
@@ -70,15 +71,12 @@
                         </li>
                     </ul>
                 </li>
-
                 <li class="sidebar-item {{ Request::url() == url('/product') ? 'active' : '' }}">
                     <a href="{{ url('/product') }}" class='sidebar-link'>
                         <i class="bi bi-boxes"></i>
                         <span>Product</span>
                     </a>
                 </li>
-
-
 
                 <li
                     class="sidebar-item  has-sub  @if (Request::url() == url('/transaction')) active @endif
@@ -100,6 +98,36 @@
                         </li>
                     </ul>
                 </li>
+                @endrole
+                @role('Admin')
+                <li class="sidebar-item {{ Request::url() == url('/product') ? 'active' : '' }}">
+                    <a href="{{ url('/product') }}" class='sidebar-link'>
+                        <i class="bi bi-boxes"></i>
+                        <span>Product</span>
+                    </a>
+                </li>
+
+                <li
+                    class="sidebar-item  has-sub  @if (Request::url() == url('/transaction')) active @endif
+                @if (Request::url() == url('/sale')) active @endif
+                ">
+                    <a href="#" class='sidebar-link'>
+                        <i class="bi bi-arrow-left-right"></i>
+                        <span>Transaksi</span>
+                    </a>
+                    <ul
+                        class="submenu @if (Request::url() == url('/transaction')) active @endif
+                    @if (Request::url() == url('/sale')) active @endif">
+
+                        <li class="submenu-item {{ Request::url() == url('/transaction') ? 'active' : '' }}">
+                            <a href="{{ url('/transaction') }}">Transaksi Pembelian</a>
+                        </li>
+                        <li class="submenu-item {{ Request::url() == url('/sale') ? 'active' : '' }}">
+                            <a href="{{ url('/sale') }}">Transaksi Penjualan</a>
+                        </li>
+                    </ul>
+                </li>
+                @endrole
 
 
                 <li class="sidebar-item">
@@ -111,5 +139,6 @@
 
             </ul>
         </div>
+
     </div>
 </div>
