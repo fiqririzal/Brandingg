@@ -1,12 +1,13 @@
 <script>
-let buy_transaction_id;
-let price = 0;
+    let buy_transaction_id;
 
-const create = () => {
-    $('#createForm').trigger('reset');
-    $('#createModal').modal('show');
-}
-const deleteData = (id) => {
+
+    const create = () => {
+        $('#createForm').trigger('reset');
+        $('#createModal').modal('show');
+    }
+
+    const deleteData = (id) => {
         Swal.fire({
             title: 'Apa anda yakin untuk menghapus kategori ini?',
             icon: 'warning',
@@ -52,13 +53,14 @@ const deleteData = (id) => {
         });
 
     }
-$(function () {
-    $.ajaxSetup({
+
+    $(function() {
+        $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             }
         });
-    $('#createSubmit').click(function(e) {
+        $('#createSubmit').click(function(e) {
             e.preventDefault();
 
             var formData = $('#createForm').serialize();
@@ -100,39 +102,44 @@ $(function () {
                 }
             })
         });
-    $('#qty').on('keyup', function(){
-        var qty = parseInt($(this).val());
+        $('#price').on('keyup', function() {
+            var price = parseInt($(this).val());
 
-        var cost = parseInt(price)* qty;
-
-        $('#cost').val(cost);
-    })
-    $('#product').on('change', function(){
-
-        var product_id = $(this).val();
-        swal.fire({
-            title:'Mohon Tunggu',
-            showConfirmButton:false,
-            allowOutsideClick:false,
-            willOpen:()=>{
-                Swal.showLoading()
-            }
-        });
-        $.ajax({
-            type: "get",
-            url: `/transaction/${product_id}`,
-            dataType: "json",
-            success: function(response){
-                $('#category').val(response.category_id);
-                price = response.price;
-                $('#cost').val('');
-                swal.close();
-            }
         })
-    })
+        $('#qty').on('keyup', function() {
+            var qty = parseInt($(this).val());
+
+            var cost = parseInt($('#price').val()) * qty;
+
+            $('#cost').val(cost);
+        })
+
+
+        $('#product').on('change', function() {
+
+            var product_id = $(this).val();
+            swal.fire({
+                title: 'Mohon Tunggu',
+                showConfirmButton: false,
+                allowOutsideClick: false,
+                willOpen: () => {
+                    Swal.showLoading()
+                }
+            });
+            $.ajax({
+                type: "get",
+                url: `/transaction/${product_id}`,
+                dataType: "json",
+                success: function(response) {
+                    $('#category').val(response.category_id);
+
+                    swal.close();
+                }
+            })
+        })
 
         $('#table_transaction').DataTable({
-        dom: 'Bfrtip',
+            dom: 'Bfrtip',
             // Configure the drop down options.
             lengthMenu: [
                 [10, 25, 50, -1],
@@ -163,6 +170,9 @@ $(function () {
                     data: 'product_id',
                 },
                 {
+                    data: 'price',
+                },
+                {
                     data: 'qty',
                 },
                 {
@@ -176,5 +186,5 @@ $(function () {
 
             ]
         })
-})
+    })
 </script>

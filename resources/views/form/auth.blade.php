@@ -52,10 +52,10 @@
                 </div>
                 <button class="btn btn-primary btn-block btn-lg shadow-lg mt-5">Log in</button>
             </form>
-            <div class="text-center mt-5 text-lg fs-4">
+            {{-- <div class="text-center mt-5 text-lg fs-4">
                 <p class="auth-subtitle">Don't have an account? <a href="{{ url('/register') }}" class="font-bold">Sign
                         up</a>.</p>
-            </div>
+            </div> --}}
         </div>
     </div>
     </div>

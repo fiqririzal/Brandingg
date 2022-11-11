@@ -41,6 +41,12 @@ class ProductController extends Controller
             ->addColumn('image', function ($product) {
                 return '<img class="img-thumbnail" src="' . asset('images/' . $product->image) . '">';
             })
+            ->addColumn('price', function ($row) {
+                return 'Rp. ' . number_format($row->price);
+            })
+            ->addColumn('stock', function ($row) {
+                return number_format($row->stock);
+            })
             ->addColumn('action', function ($row) {
                 $data = [
                     'id' => $row->id
@@ -258,14 +264,12 @@ class ProductController extends Controller
         };
         return Response::json($json);
     }
-    public function import(Request $request){
+    public function import(Request $request)
+    {
         $data = $request->file('import');
 
         Excel::import(new ProductImport, $data);
 
         return \redirect()->back();
-        
     }
-
-
 }

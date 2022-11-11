@@ -24,6 +24,7 @@
                             <th>SUPPLIER</th>
                             <th>KATEGORI</th>
                             <th>PRODUK</th>
+                            <th>HARGA</th>
                             <th>JUMLAH BARANG</th>
                             <th>TOTAL HARGA</th>
                             <th>ACTION</th>

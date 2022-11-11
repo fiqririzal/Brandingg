@@ -18,8 +18,9 @@ class CreateBuyTransactionTable extends Migration
             $table->unsignedBigInteger('supplier_id');
             $table->unsignedBigInteger('product_id');
             $table->unsignedBigInteger('category_id');
+            $table->integer('price');
             $table->string('qty');
-            $table->decimal('cost');
+            $table->integer('cost');
             $table->timestamps();
         });
     }

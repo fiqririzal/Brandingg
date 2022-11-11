@@ -1,5 +1,10 @@
 <?php
 
+use App\Sale;
+use App\Product;
+use App\Supplier;
+use App\buy_transaction;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,7 +24,17 @@ Route::group([
     'middleware' => 'auth'
 ], function () {
     Route::get('/', function () {
-        return view('dashboard');
+        $products = Product::get()->count();
+        $suppliers = Supplier::get()->count();
+        $cost = buy_transaction::sum('cost');
+        $revenue = Sale::sum('total');
+        return view('dashboard', [
+            'title' => 'cihuy',
+            'products' => $products,
+            'suppliers' => $suppliers,
+            'cost' => $cost,
+            'revenue' => $revenue,
+        ]);
     });
 
 

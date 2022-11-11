@@ -38,7 +38,13 @@ class SaleController extends Controller
                 return $row->product->name;
             })
             ->addColumn('price', function ($row) {
-                return $row->product->price;
+                return 'Rp. ' . number_format($row->product->price);
+            })
+            ->addColumn('quantity', function ($row) {
+                return number_format($row->quantity);
+            })
+            ->addColumn('total', function ($row) {
+                return 'Rp. ' . number_format($row->total);
             })
             ->addColumn('action', function ($row) {
                 $data = [
@@ -84,7 +90,7 @@ class SaleController extends Controller
             ];
         } elseif ($request->quantity > $stock) {
             $json = [
-                'msg'       => 'Mohon isi stok kurang',
+                'msg'       => 'Mohon maaf stok kurang',
                 'status'    => false
             ];
         } else {
